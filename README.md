@@ -1,41 +1,108 @@
-# Global Solution - IoT
+<div align="center">
 
-## 📹 Vídeos do Projeto
+  <img src="assets/logoetexto.svg" alt="Conveni Logo" width="300"/>
 
-**Vídeo da Solução:** [Assista ao vídeo da apresentação](https://www.youtube.com/watch?v=gfY162zVXz8)
+  
 
-**Pitch do Projeto:** *ADIICONAR DPS DE GRAVADO*
+  # Global Solution - Sistema Inteligente de Match de Vagas
 
-## 👥 Integrantes
+  
+
+  **Análise automática de currículos com IA para encontrar as melhores oportunidades**
+
+  
+
+  [![Video](https://img.shields.io/badge/📹_Vídeo-YouTube-red)](https://www.youtube.com/watch?v=gfY162zVXz8)
+  [![Pitch](https://img.shields.io/badge/🎤_Pitch-Em_Breve-orange)]()
+
+  
+
+</div>
+
+---
+
+## 👥 Equipe
+
+<table>
+<tr>
+<td width="50%">
 
 | Nome | RM | GitHub |
-|------|-----|--------|
+|------|-------|--------|
 | Marcos Vinicius Pereira de Oliveira | 557252 | [@marcos3777](https://github.com/marcos3777) |
 | Ruan Lima Silva | 558775 | [@ruaanls](https://github.com/ruaanls) |
 | Richardy Borges Santana | 557883 | [@RichardyBS](https://github.com/RichardyBS) |
 
+</td>
+<td width="50%">
+<div align="center">
+  <img src="assets/pitch3x.gif" alt="Demo do Sistema" width="300"/>
+</div>
+</td>
+</tr>
+</table>
+
+---
+
 ## 📄 Sobre o Projeto
 
-Este projeto utiliza **N8n** como backend, integrando com a **IA da OpenAI** para leitura e interpretação de currículos. O sistema realiza match de perfil e vaga, sugerindo as melhores oportunidades para os candidatos.
+Sistema automatizado de análise de currículos que utiliza **N8n** como backend de automação, integrado com **IA da OpenAI** (GPT-4.1-mini) para leitura e interpretação inteligente de currículos. O sistema realiza extração avançada de dados, match de perfil e vaga, sugerindo as melhores oportunidades para candidatos.
 
-## 🏗️ Arquitetura do Workflow
+### Fluxo do Usuário
 
-O workflow implementado no N8n (arquivo `GlobalSolution.json`) possui os seguintes componentes principais:
+<div align="center">
+  <img src="assets/fluxograma_simplificado.png" alt="Fluxograma Simplificado" width="800"/>
+</div>
 
-### 1. 📥 Recepção de Dados
-- **Webhook**: Endpoint POST `/leituracv` que recebe currículos enviados via upload de arquivos PDF
-- **On Form Submission**: Captura dados de formulários web para complementar informações do candidato
+### Principais Funcionalidades
 
-### 2. 🤖 Processamento com IA
+- 📄 **Upload e análise automática de currículos em PDF**
+- 🤖 **Extração inteligente de mais de 40 campos do currículo**
+- 🎯 **Análise de perfil comportamental e competências técnicas**
+- 🔐 **Autenticação segura com Firebase**
+- 💾 **Armazenamento estruturado em PostgreSQL**
+- ✅ **Validação de dados com JSON Schema**
 
+---
+
+## 🛠️ Tecnologias
+
+- **N8n** (Plataforma de automação de workflows)
+- **OpenAI API** (GPT-4.1-mini)
+- **PostgreSQL** (Banco de dados relacional)
+- **Firebase Authentication** (Sistema de autenticação)
+- **Webhooks** (APIs RESTful)
+- **JSON Schema** (Validação de dados)
+
+---
+
+## 🏗️ Arquitetura do Sistema
+
+### Fluxo Completo do Workflow
+
+<div align="center">
+  <img src="assets/fluxograma_completo.png" alt="Fluxograma Completo" width="900"/>
+</div>
+
+### Arquitetura de Componentes
+
+<div align="center">
+  <img src="assets/arquitetura_sistema.png" alt="Arquitetura do Sistema" width="900"/>
+</div>
+
+### Componentes Principais
+
+#### 1. 📥 Recepção de Dados
+- **Webhook**: Endpoint POST `/leituracv` que recebe currículos via upload de arquivos PDF
+- **On Form Submission**: Captura dados de formulários web para complementar informações
+
+#### 2. 🤖 Processamento com IA
 - **Extract from File**: Extrai texto de arquivos PDF enviados
 - **AI Agent**: Processador inteligente que analisa o conteúdo do currículo
-- **OpenAI Chat Model**: Utiliza o modelo GPT-4.1-mini para interpretação avançada
+- **OpenAI Chat Model**: Utiliza GPT-4.1-mini para interpretação avançada
 - **Structured Output Parser**: Valida e estrutura a saída em formato JSON padronizado
 
-### 3. 📊 Campos Extraídos do Currículo
-
-A IA extrai e estrutura mais de 40 campos do currículo, incluindo:
+#### 3. 📊 Dados Extraídos do Currículo
 
 **Dados Pessoais:**
 - Nome, email, estado, cidade, idade
@@ -71,54 +138,53 @@ A IA extrai e estrutura mais de 40 campos do currículo, incluindo:
 - Tags e palavras-chave
 - Fuso horário
 
-### 4. 🔐 Autenticação e Segurança
-
+#### 4. 🔐 Autenticação e Segurança
 - **Check Token Firebase**: Valida tokens de autenticação Firebase
 - **Error Handlers**: Tratamento de erros para autenticação, arquivo e IA
 
-### 5. 💾 Armazenamento de Dados
-
+#### 5. 💾 Armazenamento de Dados
 - **PostgreSQL**: Banco de dados relacional para armazenar perfis de candidatos
-- **Insert/Update Operations**: Insere novos perfis ou atualiza existentes
+- **Insert/Update Operations**: Insere novos perfis ou atualiza existentes (UPSERT)
 - **Select Operations**: Recupera informações de candidatos pelo ID
 
-### 6. ✅ Resposta ao Usuário
-
+#### 6. ✅ Resposta ao Usuário
 - **Success Nodes**: Retorna confirmação de sucesso após processamento
-- Resposta estruturada com dados processados
-
-## 🛠️ Tecnologias Utilizadas
-
-- **N8n** - Plataforma de automação de workflows
-- **OpenAI API** - GPT-4.1-mini para análise de currículos
-- **PostgreSQL** - Banco de dados relacional
-- **Firebase Authentication** - Sistema de autenticação
-- **Webhooks** - APIs RESTful para integração
-
-## 📋 Fluxo de Funcionamento
-
-1. **Upload**: Candidato envia currículo (PDF ou texto) através do webhook ou formulário
-2. **Extração**: Sistema extrai texto do arquivo PDF
-3. **Autenticação**: Token Firebase é validado
-4. **Análise IA**: OpenAI processa o currículo e extrai informações estruturadas
-5. **Validação**: Output Parser garante que o JSON está no formato correto
-6. **Armazenamento**: Dados são salvos ou atualizados no PostgreSQL
-7. **Resposta**: Sistema retorna confirmação de sucesso
-
-## 📦 Arquivos do Projeto
-
-- **GlobalSolution.json**: Workflow completo do N8n com todos os nós configurados
-
-## 🚀 Como Utilizar
-
-1. Importe o arquivo `GlobalSolution.json` no N8n
-2. Configure as credenciais:
-   - OpenAI API Key
-   - PostgreSQL connection
-   - Firebase credentials
-3. Ative o workflow
-4. Envie requisições POST para o endpoint `/leituracv` com o currículo em PDF
+- Resposta estruturada com dados processados em JSON
 
 ---
 
-**Desenvolvido para Global Solution - FIAP 2025**
+## 📋 Fluxo de Funcionamento
+
+```mermaid
+graph LR
+    A[Upload de CV PDF] --> B[Validação Firebase]
+    B --> C[Extração de Texto]
+    C --> D[Análise com IA OpenAI]
+    D --> E[Validação JSON Schema]
+    E --> F[Armazenamento PostgreSQL]
+    F --> G[Resposta de Sucesso]
+```
+
+1. **Upload**: Candidato envia currículo em PDF através do webhook
+2. **Autenticação**: Token Firebase é validado para segurança
+3. **Extração**: Sistema extrai texto do arquivo PDF
+4. **Análise IA**: OpenAI processa o currículo e extrai informações estruturadas
+5. **Validação**: Output Parser garante que o JSON está no formato correto
+6. **Armazenamento**: Dados são salvos ou atualizados no PostgreSQL
+7. **Resposta**: Sistema retorna confirmação de sucesso com dados processados
+
+---
+
+<div align="center">
+
+  <img src="assets/Fiap-logo-novo.jpg" alt="FIAP Logo" width="200"/>
+
+  
+
+  **Projeto desenvolvido para Global Solution - FIAP 2025**
+
+  
+
+  © 2025 Conveni Team - Todos os direitos reservados
+
+</div>
